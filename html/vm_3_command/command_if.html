@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>if</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body :controller="test">
+		<script>
+			var vm = avalon.define({
+			$id: "test",
+			aaa: "这是被隐藏的内容",
+			toggle: false
+			});
+		</script>
+		<p><button type="button" :click='@toggle = !@toggle'>点我</span></button></p>
+		<div :if="@toggle">{{@aaa}}</div>
+	</body>
+</html>

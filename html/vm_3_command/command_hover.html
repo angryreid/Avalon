@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>hover</title>
+	<style type="text/css">
+		.aaa{
+			color: red;
+		}
+		.bbb{
+			background: blue;
+		}
+		.ccc{
+			font-size: 26px;
+		}
+		.eee4{
+			color: yellow;
+		}
+	</style>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body ms-controller="test">
+	<!-- 通过属性值决定是否渲染目标元素, 为否时原位置上变成一个注释节点 -->
+	<!-- 通过使用注释的方法 -->
+    <script>
+        avalon.define({
+            $id: 'test',
+            aaa: "aaa bbb ccc",
+            bbb: 'ddd',
+            ccc: ['xxx', 'yyy', 'zzz'],
+            ddd: 'eee',
+            toggle: true,
+            toggle2: false
+        });
+    </script>
+
+    <span :hover="@aaa">直接引用字符串</span>
+    <span :hover="@ccc">直接引用数组</span>
+    <span :hover="[@aaa, @bbb,'kkk']">使用对象字面量</span>
+    <span :hover="['aaa', 'bbb',(@toggle? 'ccc':'ddd')]">选择性添加类名</span>
+    <span :hover="[@toggle && 'aaa']">选择性添加类名</span>
+    <span :hover="[ @ddd + 4]">动态生成类名</span>
+</body>
+</html>

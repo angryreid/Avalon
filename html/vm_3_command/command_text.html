@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>text</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<div ms-controller='derek'>
+		<span ms-text='@hobby'>不使用过滤器</span>
+		<span ms-text='@hobby | uppercase'>使用过滤器</span>
+	</div>
+	<script type="text/javascript">
+		avalon.define({
+			$id:'derek',
+			hobby:'guitar'
+		});
+	</script>
+</body>
+</html>
