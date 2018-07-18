@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-sacle=1.0">
+		<script type="text/javascript" src="../node_modules/avalon2/dist/avalon.js"></script>
+		<title>vm demo 1</title>
+	</head>
+	<body>
+		<div ms-controller='derek'>
+			
+		</div>
+		<div ms-controller='emma'>
+			
+		</div>
+		<div ms-controller='test'>
+			<div ms-for='el in @array'>
+				{{el}}<button type="button" ms-click='@array.remove(el)'>click me for deleteing current row</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+			var vm = avalon.define({
+				$id:'derek',
+				hobby:'guitar'
+			});
+			console.log(vm);
+			console.log(avalon.vmodels);
+	</script>
+</html>

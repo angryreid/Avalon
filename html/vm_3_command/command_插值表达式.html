@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>插值表达式</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<div ms-controller='test'>
+		<p>{{@name}}{{@hobby}}这个性能差些</p>
+		<p>{{@name}}+{{@hobby}}这个性能好些</p>
+		<p>{{@name+' '+@hobby | uppercase}} 选择器必须放在表达值的后端</p>
+		<p>插值表达式一般与格式化功能的过滤器一起使用</p>
+	</div>
+	<script type="text/javascript">
+		avalon.config({debug: false});
+		<!-- 插值表达式 -->
+		var vm = avalon.define({
+			$id:'test',
+			name:'derek',
+			hobby:'guitar'
+		})
+	</script>
+</body>
+</html>

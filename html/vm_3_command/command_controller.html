@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>controller</title>
+		<style type="text/css">
+			.ms-controller{
+				visibility: hidden;
+			}
+		</style>
+		<script type="text/javascript" src='../../node_modules/avalon2/dist/avalon.js'></script>
+	</head>
+	<body>
+		<div ms-controller='derek'>
+			<p>this is {{$id}}'s hobby:{{@hobby}}</p>
+			<div ms-controller='emma'>
+				<p>this is {{$id}}'s hobby:{{@hobby}} {{@color}}</p>
+				<div ms-controller='boy'>
+					<p>this is {{$id}}'s hobby:{{@hobby}} {{@color}} </p>
+				</div>
+				<div ms-controller='girl'>
+					<p>this is {{$id}}'s hobby:{{@hobby+' '}}{{@color}}</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 这个指令是用于圈定某个VM的作用域范围,类似于标签,子属性使用父属性
+			// 没有的属性，向上寻找
+			avalon.define({
+				$id:'derek',
+				hobby:'guitar',
+				color:'red'
+			});
+			avalon.define({
+				$id:'emma',
+				hobby:'eat meat',
+				color:'yellow'
+			});
+			avalon.define({
+				$id:'boy',
+				hobby:'basketball'
+			});
+			avalon.define({
+				$id:'girl',
+				hobby:'piano'
+			})
+		</script>
+	</body>
+</html>

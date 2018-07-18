@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>Skip</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<div ms-controller='derek'>
+			<p ms-skip='true'>{{@hobby}}</p>
+			<div>{{@hobby}}</div>
+		</div>
+		<script type="text/javascript">
+		// 让avalon的扫描引擎跳过某一部分区域, 方便能原样输出
+		// 合理使用ms-skip能大大提高性能
+			var vm = avalon.define({
+				$id:'derek',
+				hobby:'guitar',
+				toogle:false
+			})
+		</script>
+	</body>
+</html>
