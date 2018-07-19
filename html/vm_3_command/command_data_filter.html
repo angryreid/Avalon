@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>filter</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<!-- 
+	<input value="11"  ms-duplex="@aaa | uppercase"/>
+	但这里有一个隐患,可能导致死循环, 因此建议放在事件回调中实现.
+	 -->
+	 <div ms-controller='derek'>
+	 	<div>
+	 		<input type="text" name="" ms-on-input='@formatNumber' ms-duplex='@number'>{{@number}}
+	 	</div>
+	 	<div>
+	 		<input type="text" name="" ms-on-change='@formatDate' ms-duplex='@date'>{{@date}}
+	 	</div>
+	 </div>
+	 <script type="text/javascript">
+	 	var vm = avalon.define({
+	 		$id:'derek',
+	 		number:1,
+	 		date:'123',
+	 		formatNumber:function(e){
+	 			vm.aaa = e.target.value.replace(/\D/g,'');
+	 			alert(1);
+	 		},
+	 		formatDate:function(e){
+	 			alert(2);
+	 			vm.bbb = avalon.filter.date(e.target.value, 'yyyy-MM-dd')
+
+	 		}
+	 	});
+	 </script>
+</body>
+</html>

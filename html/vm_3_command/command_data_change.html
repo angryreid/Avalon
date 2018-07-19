@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>数据转换</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<!-- 数据转换器ms-duplex-checked了.那只能用于checkbox与radio. -->
+		<!-- 为什么会有这种东西呢?因为无论我们原来的数据类型是什么,跑到表单中都会变成字符串,然后我们通过事件取出来 它们也是字符串,不会主动变回原来的类型.我们需要一种机制保持数据原来的类型,这就是数据转换器. -->
+		<!--
+		ms-duplex-string="@aaa"
+		ms-duplex-number="@aaa"
+		ms-duplex-boolean="@aaa"
+		ms-duplex-checked="@aaa"
+		-->
+		<!-- 前三个是将元素的value值转换成string, number, boolean（只有为'false'时转换为false）
+		最后是根据当前元素（它只能是radio或checkbox）的checked属性值转换为vm对应属性的值。
+		它们都是放在属性名上。当数据从元素节点往vmodel同步时，转换成预期的数据。 -->
+		<div ms-controller='derek'>
+			<input type="text" name="" ms-duplex-number='@age'>{{@age}}
+		</div>
+		<script type="text/javascript">
+			var vm = avalon.define({
+				$id:'derek',	
+				age:22
+			});
+			console.log(typeof vm.age);
+		</script>
+	</body>
+</html>

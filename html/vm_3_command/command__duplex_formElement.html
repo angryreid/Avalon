@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>表单元素</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            aaa: '33',
+            bbb: ['22']
+        });
+
+    </script>
+
+    <input type="radio" value="11"  ms-duplex="@aaa"/>
+    <input type="radio" value="22"  ms-duplex="@aaa"/>
+    <input type="radio" value="33"  ms-duplex="@aaa"/>
+    <input type="checkbox" value="11"  ms-duplex="@bbb"/>
+    <input type="checkbox" value="22"  ms-duplex="@bbb"/>
+    <input type="checkbox" value="33"  ms-duplex="@bbb"/>
+    <p>radio: {{@aaa}}; checkbox:{{@bbb}}</p>
+
+    <hr>
+    <!-- 表示一个ms-duplex-checked，选中状态true false -->
+    <input type="radio"  ms-duplex-checked="@aaa"/>
+    <input type="checkbox"  ms-duplex-checked="@bbb"/>
+    <p>radio: {{@aaa}}; checkbox:{{@bbb}}</p>
+
+    <select :duplex="@aaa"><option>aaa</option><option>bbb</option><option>ccc</option></select>
+    <select multiple="true" :duplex="@bbb"><option>aaa</option><option>bbb</option><option>ccc</option></select>
+</body>
+</body>
+</html>

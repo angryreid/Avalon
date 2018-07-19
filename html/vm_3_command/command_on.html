@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>on</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body ms-controller='derek'>
+	<!-- 此绑定为元素添加交互功能，对用户行为作出响应. ms-on-*="xxx"是其使用形式, *代表click, mouseover, touchstart等事件名，只能与小写形式定义， xxx是事件回调本身，可以是方法名，或表达式。 默认,事件回调的第一个参数是事件对象,并进行标准化处理. 如果你是用ms-on-click="@fn(el, 1)"这样的传参方式，第一个传参被你占用， 而你又想用事件对象，可以使用$event标识符，即ms-on-click="@fn(el, 1, $event)" 那么第三个参数就是事件对象。 -->
+	<div :html='@h'></div>
+	<div>
+		<button type="button" :click-1='@fn' :click-2='@fn2' :click-3='@fn3'>click</button>
+	</div>
+	<script type="text/javascript">
+		var vm = avalon.define({
+			$id:'derek',
+			h:'hello',
+			fn(){
+				alert(1);
+			},
+			fn2(){
+				alert(2);
+			},
+			fn3(){
+				alert(3);
+			}
+		});
+		console.log(vm.$model);
+	</script>
+</body>
+</html>

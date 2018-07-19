@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>for</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<div ms-controller='derek'>
+			<ul>
+				<li :for='el in @hobby'>{{el}}</li>
+			</ul>
+			<ul>
+				<li :for='(index,el) in @friends'>{{index}} -- {{el}}</li>
+			</ul>
+			<ul>
+				<li :for='(k,v) in @skills'>{{k}} --- {{v}}</li>
+			</ul>
+			<!-- ms-for还可以配套data-for-rendered回调,当列表渲染好时执行此方法 -->
+			<ul>
+				<li :for='el in @hobby' data-for-rendered='@fn'>{{el}}</li>
+			</ul>
+			<!-- 如果你想截取数组的一部分出来单独循环,可以用limitBy过滤器, 使用as来引用新数组 -->
+			<ul>
+				<li :for='el in @hobby limitBy(1) as items'>{{el}}</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+		// avalon2.0的ms-for绑定集齐了ms-repeat, ms-each, ms-with的所有功能, 并且更好用, 性能提升七八倍
+		// ms-for可以同时循环对象与数组
+			var vm = avalon.define({
+				$id:'derek',
+				hobby:['guitar','pinpangball','sing'],
+				friends:['dapao','guitian','daiqing'],
+				skills:{music:'guitar',sports:'ppq',cording:'js'},
+				fn(){
+					alert('you are a good man')
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>$computed</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<div ms-controller='test'>
+		<p>{{@bbb}}</p>
+		<p>{{@xxx}}</p>
+		<!-- <p>{{@xxx('aaa bbb')}}</p>
+		<p>{{@bbb}}</p>
+		<p>{{@xxx}}</p> -->
+	</div>
+	<script type="text/javascript">
+		var vm = avalon.define({
+        $id:'test',
+        aaa: 111,
+        $computed: {//计算属性在这里集中定义
+           bbb: function(){return this.aaa+'!!!'},//只读计算
+           xxx: {//可写计算
+               get: function(){
+                   return this.aaa + this.bbb
+               },
+               set: function(val){
+                  var arr = val.split(' ')
+                  this.aaa = arr[0]
+                  this.bbb = arr[1]
+               }
+           }
+        },
+        //从这里开始都是非监控属性
+        $aa: 222,
+        bbb: new Date,
+        ccc: /regexp/,
+        ddd: function(){},
+        eee: document.body//节点，window,文档
+    });
+	console.log(typeof vm.xxx)
+	</script>
+</body>
+</html>

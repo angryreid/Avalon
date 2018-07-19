@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>dulex</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<!-- 
+		双工绑定是MVVM框架中最强大的指令.react推崇单向数据流,没有双工绑定, 那么需要rudex等额外的库来实现相同的功能.
+		双工绑定只要用于表单元素上.
+		或当一个div设置了contenteditable为true,也可以用ms-duplex指令.
+		 -->
+		<div ms-controller='derek'>
+			<!-- 实时监控 -->
+			<p>实时监控</p>
+			<input type="text" name="name" ms-duplex='@name'>{{@name}}<hr>
+			<input type="text" name="hobby" ms-duplex='@hobby'>{{@hobby}}
+			<p>输入结束后进行监控</p>
+			<!-- 失去焦点时 才同步,那么可以使用change过滤器 -->
+			<input type="text" name="school" ms-duplex='@school | change'>{{@school}}
+
+			<p>延迟同步</p>
+			<!-- 如果你是做智能提示, 控件是绑定了一个AJAX请求与后端不断交互, 使用oninput事件会太频繁, 使用onchange事件会太迟钝,那么我们可以使用debounce过滤器 -->
+			<input type="text" name="home" ms-duplex='@home | debounce(300)'>{{@home}}
+			<!-- 非表单元素使用 -->
+			<div contenteditable='true' ms-duplex='@name | debounce(300)'></div>
+			<p>{{@name}}</p>
+		</div>
+		<script type="text/javascript">
+			var vm = avalon.define({
+				$id:'derek',
+				name:'derek',
+				hobby:'guitar',
+				school:'cqjtu',
+				home:'guji'
+			})
+		</script>
+	</body>
+</html>
