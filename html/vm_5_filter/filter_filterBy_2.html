@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>过滤</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<div ms-controller="test">
+        <ul>
+            <li ms-for="(index,el) in @arr | filterBy(@fn, 'xxx')">{{index}}---{{el.color}}</li>
+
+        </ul>
+    </div>
+     <script>
+        var vm = avalon.define({
+            $id: 'test',
+             arr: [{color: 'red'},{color:'green'},{color:'red'}],
+             fn: function(el, index, xxx){
+                 console.log(el, index, xxx)
+                 return el.color === 'red'
+             }
+        });
+    </script>
+</body>
+</html>

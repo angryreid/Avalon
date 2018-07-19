@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>rules</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<!--
+		----规则：
+			required(true)	必须输入的字段
+			norequired(true)	不是必填的字段
+			email(true)	必须输入正确格式的电子邮件
+			url(true)	必须输入正确格式的网址
+			date(true或正则)	必须输入正确格式的日期。默认是要求YYYY-MM-dd这样的格式
+			number(true)	必须输入合法的数字（负数，小数）
+			digits(true)	必须输入整数
+			pattern(正则或true）	让输入数据匹配给定的正则，如果没有指定，那么会到元素上找pattern属性转换成正则再匹配
+			equalto(ID名）	输入值必须和 #id 元素的value 相同
+			maxlength：5	输入长度最多是 5 的字符串（汉字算一个字符）
+			minlength：10	输入长度最小是 10 的字符串（汉字算一个字符）
+			chs（true）	要求输入全部是中文
+			max:5	输入值不能大于 5
+			min:10	输入值不能小于 10
+		-->
+		<!--
+		----这些验证规则要求使用ms-rules指令表示，要求为一个普通的JS对象----
+		-->
+		<!--
+			此外要求验征框架能动起来，还必须在所有表单元素外包一个form元素，在form元素上加ms-validate指令。
+		-->
+		<div ms-controller="validate1">
+			<form ms-validate="@validate">
+				<p><input ms-duplex="@aaa" placeholder="username"
+				ms-rules='{required:true,chs:true}' >{{@aaa}}</p>
+				<p><input type="password" id="pw" placeholder="password"
+					ms-rules='{required:true}'
+				ms-duplex="@bbb" /></p>
+				<p><input type="password"
+					ms-rules="{required:true,equalto:'pw'}" placeholder="再填一次"
+				ms-duplex="@ccc | change" /></p>
+				<p><input type="submit" value="submit"/></p>
+			</form>
+		</div>
+		<script type="text/javascript">
+			 var vm = avalon.define({
+		        $id: "validate1",
+		        aaa: "",
+		        bbb: '',
+		        ccc: '',
+		        validate: {
+		            onError: function (reasons) {
+		                reasons.forEach(function (reason) {
+		                    console.log(reason.getMessage())
+		                })
+		            },
+		            onValidateAll: function (reasons) {
+		                if (reasons.length) {
+		                    console.log('有表单没有通过')
+		                } else {
+		                    console.log('全部通过')
+		                }
+		            }
+		        }
+		    });
+			 // 如果验证规则不满足你，你可以自行在----avalon.validators----对象上添加。
+		</script>
+	</body>
+</html>

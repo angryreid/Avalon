@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>select操作</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<div ms-controller='derek'>
+		<select ms-duplex="@selected" :on-change='@fn'>
+        <option  ms-for="el in @options">{{el}}</option>
+    </select>
+	</div>
+	<script type="text/javascript">
+		var vm = avalon.define({
+			$id:'derek',
+			selected:'you',
+			options:['you','me','she'],
+			fn(){
+				alert(this.selected);
+				console.log(vm.selected);
+			}
+		});
+		console.log(vm.selected)
+	</script>
+</body>
+</html>

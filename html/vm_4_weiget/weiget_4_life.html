@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>组件生命周期</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body ms-controller='derek'>
+		<ms-button :on-click='@fn'>{{@hello}}</ms-button>
+		<ms-button :on-click='@re'>{{@hello}}</ms-button>
+		<script>
+			avalon.component('ms-button',{
+				template:'<button type="button"><span><slot name="buttonText"></span></button>',
+				defaults:{
+					buttonText:'button',
+					// 组件生命周期
+					// 这是组件的vm创建完毕就立即调用时，这时它对应的元素节点或虚拟DOM都不存在
+					onInit:function(){
+						alert('onInit')
+					},
+					// 当其虚拟DOM构建完毕，它就生成其真实DOM，并用它插入到DOM树
+					onReady:function(){
+						alert('onReady')
+					},
+					// 当这个组件或其子孙节点的某些属性值或文本内容发生变化
+					onViewChange:function(){
+						alert('onViewChange')
+					},
+					onDispose:function(){
+						alert('onDispose')
+					}
+				},
+				soleSlot:'buttonText'
+			});
+			var vm = avalon.define({
+				$id:'derek',
+				hello:'hello',
+				fn:function(){
+					this.hello = 'world';
+				},
+				re:function(){
+					// console.log(this)
+				}
+			})
+		</script>
+	</body>
+</html>

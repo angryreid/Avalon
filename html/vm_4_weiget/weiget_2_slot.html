@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>slot</title>
+		<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<div ms-controller='test'>
+			<ms-view>
+				<!-- 使用时使用slot属性，插卡元素 -->
+			<div slot="content">这是子视图的内容</div>
+			</ms-view>
+		</div>
+		<script>
+			avalon.component('ms-view',{
+				template:'<div class="view"><slot name="content" /></div>',//定义时使用为name属性，插槽元素
+				defaults: {
+				content: ""
+				}
+			});
+
+		</script>
+	</body>
+</html>

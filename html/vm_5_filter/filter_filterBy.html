@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>filterBy</title>
+	<script type="text/javascript" src="../../node_modules/avalon2/dist/avalon.js"></script>
+</head>
+<body>
+	<div ms-controller='filterBy'>
+	    <select ms-duplex='@search'>
+	        <option>a</option>
+	        <option>b</option>
+	        <option>c</option>
+	    </select>
+	    <p><button ms-click="@search = @searchFn | prevent">变成过滤函数</button></p>
+	    <p><button ms-click="@search = @searchFn2 | prevent">变成过滤函数2</button></p>
+	    <p><button ms-click="@search = @searchFn3 | prevent">变成过滤函数3</button></p>
+	    <ul>
+	        <li ms-for='el in @array | filterBy(@search)'>{{el}}</li>
+	    </ul>
+	    <hr>
+	    <ul>
+	        <li ms-for='el in @object | filterBy(@search)'>{{el}}</li>
+	    </ul>
+	</div>
+	<script type="text/javascript">
+		avalon.define({
+	        $id: "filterBy",
+	        array: ['aaaa', 'aab', 'acb', 'ccc', 'dddd'],
+	        object: {a: 'aaaa', b: 'aab', c: 'acb', d: 'ccc', e: 'dddd'},
+	        searchs: "a",
+	        searchFn: function (el, i) {
+	            return i > 2
+	        },
+	        searchFn2: function (el, i) {
+	            return el.length === 4
+	        },
+	        searchFn3: function (el, i) {
+	            return i === 'b' || i === 1
+	        }
+	    });
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+在学习过程中，发现两个关于avalon的问题：
+	1.select元素选中之后，console.log不是当前选中元素，第二次console.log之后才是
+		代码：
+			<div ms-controller='derek'>
+				<select ms-duplex="@selected" :on-change='@fn'>
+		        <option  ms-for="el in @options">{{el}}</option>
+		    </select>
+			</div>
+			<script type="text/javascript">
+				var vm = avalon.define({
+					$id:'derek',
+					selected:'you',
+					options:['you','me','she'],
+					fn(){
+						alert(this.selected);
+						console.log(vm.selected);
+					}
+				});
+				console.log(vm.selected)
+			</script>
+			
+	2.使用filterBy过滤元素，过滤效果类似于删除不符合的元素，所以元素下标发生改变
+		代码：
+			<div ms-controller="test">
+		        <ul>
+		            <li ms-for="(index,el) in @arr | filterBy(@fn, 'xxx')">{{index}}---{{el.color}}</li>
+
+		        </ul>
+		    </div>
+		     <script>
+		        var vm = avalon.define({
+		            $id: 'test',
+		             arr: [{color: 'red'},{color:'green'},{color:'red'}],
+		             fn: function(el, index, xxx){
+		                 console.log(el, index, xxx)
+		                 return el.color === 'red'
+		             }
+		        });
+		    </script>

@@ -12,7 +12,7 @@
 	    <p>本例子用于显示如何做一个简单的表格排序</p>
 	</div>
 	<p>
-	    <select ms-duplex="@selected">
+	    <select ms-duplex="@selected" :on-change='@fn'>
 	        <option  ms-for="el in @options">{{el}}</option>
 	    </select>
 	    <select ms-duplex-number="@trend">
@@ -45,7 +45,10 @@
 		        {name: "ccc", size: 563, date: Date.now() - 7},
 		        {name: "eee", size: 3713, date: Date.now() + 9},
 		        {name: "555", size: 389, date: Date.now() - 20}
-		    ]
+		    ],
+		    fn(){
+		    	alert(this.selected)
+		    }
 		});
 
 	</script>

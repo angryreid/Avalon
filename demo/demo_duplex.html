@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>ms-duplex 操作</title>
+		<script type="text/javascript" src="../node_modules/avalon2/dist/avalon.js"></script>
+	</head>
+	<body>
+		<div ms-controller="fruit">
+			<h3>文本域与下拉框的联动</h3>
+			<input  ms-duplex="@selected" />
+			<select ms-duplex="@selected" >
+				<option ms-for="el in @options" ><!-- ms-attr="{value: el}" -->
+					{{el}}
+				</option>
+			</select>
+		</div>
+		<script type="text/javascript">
+			avalon.define({
+				$id: "fruit",
+					options: ["苹果", "香蕉", "桃子", "雪梨", "葡萄",
+					"哈蜜瓜", "橙子", "火龙果", "荔技", "黄皮"],
+					selected: "桃子"
+				});
+		</script>
+	</body>
+</html>
